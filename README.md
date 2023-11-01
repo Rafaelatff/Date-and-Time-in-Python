@@ -124,3 +124,42 @@ delta2 = timedelta(days=1, seconds=1)
 delta3 = timedelta(weeks=-1)
 start + delta3
 ```
+
+## UTC offsets
+
+```py 
+from datetime import datetime, timedelta, timezone
+
+# US Eastern Standad time zone
+ET = timezone(timedelta(hours=-5))
+# India Standad time zone
+IST = timezone(timedelta(hours=5, minutes=30))
+# AEDT = Australian Eastern Daylight Time
+aedt = timezone(timedelta(hours=11))
+
+dt = datetime(2017, 12, 30, 15, 9, 10, tzinfo = ET)
+# Printing it will return: 2017-12-30 15:09:10-05:00
+
+print(dt.astimezone(IST)) # Set the clock -10:30 before US Eastern
+# It will return: 2017-12-31 01:39:10+05:30
+
+print(dt.replace(tzinfo=timezone.utc)) # +00:00, and returns 15h
+print(dt.astimezone(timezone.utc)) # +00:00, and returns 20h
+
+## Timezone database
+
+There is a global database will all the timezones that are updated accoding with the seasons.
+
+```py
+from datetime import datetime
+from dateutil import tz # Database
+
+# Eastern time
+et =tz.gettz('America/New_Yourk') # Format: 'Continent/City'
+
+```
+
+Note: Attention to start and ending of daylight saving time. In some cases. it may have two 1 A.M. To check if thhis could happen, we give a time to a variable first_1am and then we use `tz.datetime_ambiguous(first_1am)`.
+
+
+
