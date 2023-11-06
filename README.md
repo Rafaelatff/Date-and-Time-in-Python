@@ -161,5 +161,19 @@ et =tz.gettz('America/New_Yourk') # Format: 'Continent/City'
 
 Note: Attention to start and ending of daylight saving time. In some cases. it may have two 1 A.M. To check if thhis could happen, we give a time to a variable first_1am and then we use `tz.datetime_ambiguous(first_1am)`.
 
+Extra
+```py
+import pandas as pd
+
+# To treat dates as dates and not strings
+parse_dates = ['Start date', 'End date']
+
+# I also can use
+pd.to_datetime(rides['Start date'], format = "%Y-%m-%d %H:%M:%S")
+
+# To count
+
+rides['Member type'].value_counts()
+```
 
 
